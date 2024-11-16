@@ -1,0 +1,98 @@
+
+Q.7.Find the names of employee starting with “A”
+
+mysql> select * from emp where ename like 'a%';
++-------+---------+--------+------------+----------+--------+
+| empno | ename   | mgr_no | hiredate   | sal      | deptno |
++-------+---------+--------+------------+----------+--------+
+|  7369 | Adarsh  |   7902 | 2012-12-17 | 80000.00 |     20 |
+|  7521 | Anvitha |   7698 | 2015-02-22 | 12500.00 |     30 |
+|  7876 | ADAMS   |   7788 | 2013-01-12 | 11000.00 |     20 |
++-------+---------+--------+------------+----------+--------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+Q6.Increase income of all employees by 5% in a table.
+
+mysql> update emp
+    -> set sal = sal * 1.05;
+Query OK, 13 rows affected (0.01 sec)
+Rows matched: 13  Changed: 13  Warnings: 0
+
+mysql> select * from emp;
++-------+---------+--------+------------+----------+--------+
+| empno | ename   | mgr_no | hiredate   | sal      | deptno |
++-------+---------+--------+------------+----------+--------+
+|  7369 | Adarsh  |   7902 | 2012-12-17 | 84000.00 |     20 |
+|  7499 | Shruthi |   7698 | 2013-02-20 | 16800.00 |     30 |
+|  7521 | Anvitha |   7698 | 2015-02-22 | 13125.00 |     30 |
+|  7566 | Tanvir  |   7839 | 2008-04-02 | 31237.50 |     20 |
+|  7654 | Ramesh  |   7698 | 2014-09-28 | 13125.00 |     30 |
+|  7698 | Kumar   |   7839 | 2015-05-01 | 29925.00 |     30 |
+|  7782 | CLARK   |   7839 | 2017-06-09 | 25725.00 |     10 |
+|  7788 | SCOTT   |   7566 | 2010-12-09 | 31500.00 |     20 |
+|  7839 | KING    |   NULL | 2009-11-17 | 52500.00 |     10 |
+|  7844 | TURNER  |   7698 | 2010-09-08 | 15750.00 |     30 |
+|  7876 | ADAMS   |   7788 | 2013-01-12 | 11550.00 |     20 |
+|  7900 | JAMES   |   7698 | 2017-12-03 |  9975.00 |     30 |
+|  7902 | FORD    |   7566 | 2010-12-03 | 31500.00 |     20 |
++-------+---------+--------+------------+----------+--------+
+13 rows in set (0.00 sec)
+
+
+
+Q3. Retrieve the employee numbers of all employees who work on project
+located in Bengaluru, Hyderabad, or Mysuru
+
+mysql> select e.empno
+    -> from emp e, assigned_to a, project p
+    -> where e.empno=a.empno and a.pno=p.pno and
+    -> p.ploc in ('Bengaluru','Hyderabad','Mysuru');
++-------+
+| empno |
++-------+
+|  7499 |
+|  7499 |
+|  7521 |
+|  7521 |
+|  7566 |
+|  7654 |
+|  7654 |
+|  7698 |
+|  7839 |
++-------+
+9 rows in set (0.00 sec)
+
+
+
+Q5. Write a SQL query to find the employees name, number, dept, job_role,
+department location and project location who are working for a project
+location same as his/her department location.
+
+mysql> select e.empno, e.ename, d.dname, d.loc, a.job_role, p.ploc
+    -> from emp e,dept d, assigned_to a, project p
+    -> where e.deptno=d.deptno and d.loc=p.ploc;
+Empty set (0.00 sec)
+
+
+
+Q4. Get Employee ID’s of those employees who didn’t receive incentives
+
+mysql> select empno from emp
+    -> where empno not in (select empno from incentives);
++-------+
+| empno |
++-------+
+|  7369 |
+|  7782 |
+|  7788 |
+|  7839 |
+|  7844 |
+|  7876 |
+|  7900 |
+|  7902 |
++-------+
+8 rows in set (0.00 sec)
