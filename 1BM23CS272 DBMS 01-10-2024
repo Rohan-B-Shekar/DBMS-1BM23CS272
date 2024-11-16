@@ -1,15 +1,3 @@
-Enter password: *****
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 15
-Server version: 8.0.36 MySQL Community Server - GPL
-
-Copyright (c) 2000, 2024, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql> create database INSURANCE;
 Query OK, 1 row affected (0.01 sec)
@@ -40,18 +28,7 @@ mysql> desc person
 +-----------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
 
-mysql> create table car
-    -> (Reg_num varchar(10),
-    -> Model varchar(10).year int,
-    -> primary key(Reg_num));
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.year int,
-primary key(Reg_num))' at line 3
-mysql> create table car
-    -> (reg_num varchar(10),
-    -> Model varchar(10).year int,
-    -> primary key(reg_num));
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.year int,
-primary key(reg_num))' at line 3
+
 mysql> create table car
     -> (reg_num varchar(10),
     -> Model varchar(10),
@@ -66,14 +43,7 @@ mysql> create table accident
     -> primary key(Report_num));
 Query OK, 0 rows affected (0.02 sec)
 
-mysql> create table owns
-    -> (
-    -> Driver_id varchar(10),
-    -> reg_num varchar(10),
-    -> primary key(Driver_id, reg_num),
-    -> foreign key(Driver_id) references person(Driver_id),
-    -> foreign key(reg_num references car(reg_num));
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'references car(reg_num))' at line 7
+
 mysql> create table owns
     -> (Driver_id varchar(10),
     -> reg_num varchar(10),
@@ -186,9 +156,7 @@ mysql> select * from car;
 mysql> commit;
 Query OK, 0 rows affected (0.00 sec)
 
-mysql> insert into accident values(
-    -> '11', '01-jan-03','Mysore road');
-ERROR 1292 (22007): Incorrect date value: '01-jan-03' for column 'Accident_date' at row 1
+
 mysql> insert into accident values(
     -> '11','2003-01-01','Mysore Road');
 Query OK, 1 row affected (0.00 sec)
@@ -222,9 +190,7 @@ mysql> select * from accident
 +------------+---------------+------------------+
 5 rows in set (0.00 sec)
 
-mysql> insert into own values(
-    -> 'A01','KA052250');
-ERROR 1146 (42S02): Table 'insurance.own' doesn't exist
+
 mysql> insert into owns values(
     -> 'A01','KA052250');
 Query OK, 1 row affected (0.00 sec)
@@ -245,8 +211,7 @@ mysql> insert into owns values(
     -> 'A05','KA041702');
 Query OK, 1 row affected (0.00 sec)
 
-mysql> delete from owns values where reg_num = 'KA031181';
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values where reg_num = 'KA031181'' at line 1
+
 mysql> delete from owns where reg_num = 'KA031181';
 Query OK, 1 row affected (0.00 sec)
 
@@ -269,10 +234,8 @@ mysql> select * from owns;
 +-----------+----------+
 5 rows in set (0.00 sec)
 
-mysql> select * from owns desc Driver_id;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc Driver_id' at line 1
-mysql> select * from owns where desc Driver_id;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc Driver_id' at line 1
+
+
 mysql> desc owns;
 +-----------+-------------+------+-----+---------+-------+
 | Field     | Type        | Null | Key | Default | Extra |
@@ -358,14 +321,7 @@ mysql> select driver_id
 +-----------+
 2 rows in set (0.00 sec)
 
-mysql> select reg_num
-    -> from participated
-    -> where damage amount >=5000;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'amount >=5000' at line 3
-mysql> select driver_id
-    -> from participated
-    -> where damage amount >=5000;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'amount >=5000' at line 3
+
 mysql> select reg_num
     -> from participated
     -> where damage_amount >=5000;
